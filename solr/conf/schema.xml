@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schema name="revent" version="1.0">
+<schema name="revent" version="1.6">
   <uniqueKey>id</uniqueKey>
   <fieldType name="binary" class="solr.BinaryField"/>
   <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
@@ -21,8 +21,8 @@
   <fieldType name="string" class="solr.StrField" sortMissingLast="true"/>
   <fieldType name="strings" class="solr.StrField" sortMissingLast="true" multiValued="true"/>
   <fieldType name="text" class="solr.TextField" sortMissingLast="true"/>
-
   <fieldType name="text_de" class="solr.TextField" positionIncrementGap="100">
+
     <analyzer>
       <tokenizer class="solr.StandardTokenizerFactory"/>
       <filter class="solr.LowerCaseFilterFactory"/>
@@ -31,21 +31,22 @@
       <filter class="solr.GermanLightStemFilterFactory"/>
     </analyzer>
   </fieldType>
-  
-  <field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
+
   <field name="_version_" type="plong" indexed="true" stored="true"/>
-  
-  <field name="search_text" type="text_de" multiValued="false" indexed="true" stored="false"/>
-
+  <field name="_text_" type="text_de" multiValued="true" indexed="true" stored="false"/>
+  <field name="date" type="pdate" docValues="true" multiValued="false" indexed="true" stored="true"/>
+  <field name="description" type="text" multiValued="false" indexed="true" stored="true"/>
+  <field name="event_location" type="strings"/>
+  <field name="genre" type="pint" docValues="true" multiValued="true" indexed="true" stored="true"/>
+  <field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
+  <field name="img_url" type="strings"/>
   <field name="organizer" type="string" multiValued="false" indexed="true" stored="true"/>
+  <field name="organizerRef" type="strings"/>
+  <field name="price_class" type="pint" docValues="true" multiValued="false" indexed="true" stored="true"/>
+  <field name="search_text" type="text_de" multiValued="true" indexed="true" stored="false"/>
   <field name="title" type="string" multiValued="false" indexed="true" stored="true"/>
-  <field name="describtion" type="text" multiValued="false" indexed="true" stored="true"/>
-
-  <field name="date" type="pdate" multiValued="false" indexed="true" stored="true" docValues="true"/>
-  <field name="genre" type="pint" multiValued="true" indexed="true" stored="true" docValues="true"/>
-  <field name="price_class" type="pint" multiValued="false" indexed="true" stored="true" docValues="true"/>
-
+  <field name="website_url" type="strings"/>
+  <copyField source="description" dest="search_text"/>
   <copyField source="organizer" dest="search_text"/>
   <copyField source="title" dest="search_text"/>
-  <copyField source="describtion" dest="search_text"/>
 </schema>
