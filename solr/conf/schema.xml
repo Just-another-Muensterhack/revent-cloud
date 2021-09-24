@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema name="revent" version="1.0">
   <uniqueKey>id</uniqueKey>
+  <fieldType name="binary" class="solr.BinaryField"/>
+  <fieldType name="boolean" class="solr.BoolField" sortMissingLast="true"/>
+  <fieldType name="booleans" class="solr.BoolField" sortMissingLast="true" multiValued="true"/>
+  <fieldType name="ignored" class="solr.StrField" indexed="false" stored="false" multiValued="true"/>
+  <fieldType name="location" class="solr.LatLonType" subFieldSuffix="_coordinate"/>
   <fieldType name="pdate" class="solr.DatePointField" docValues="true"/>
+  <fieldType name="pdates" class="solr.DatePointField" docValues="true" multiValued="true"/>
+  <fieldType name="pdouble" class="solr.DoublePointField" docValues="true"/>
+  <fieldType name="pdoubles" class="solr.DoublePointField" docValues="true" multiValued="true"/>
+  <fieldType name="pfloat" class="solr.FloatPointField" docValues="true"/>
+  <fieldType name="pfloats" class="solr.FloatPointField" docValues="true" multiValued="true"/>
   <fieldType name="pint" class="solr.IntPointField" docValues="true"/>
   <fieldType name="pints" class="solr.IntPointField" docValues="true" multiValued="true"/>
   <fieldType name="plong" class="solr.LongPointField" docValues="true"/>
+  <fieldType name="plongs" class="solr.LongPointField" docValues="true" multiValued="true"/>
+  <fieldType name="point" class="solr.PointType" subFieldSuffix="_d" dimension="2"/>
+  <fieldType name="random" class="solr.RandomSortField" indexed="true"/>
   <fieldType name="string" class="solr.StrField" sortMissingLast="true"/>
+  <fieldType name="strings" class="solr.StrField" sortMissingLast="true" multiValued="true"/>
   <fieldType name="text" class="solr.TextField" sortMissingLast="true"/>
 
   <fieldType name="text_de" class="solr.TextField" positionIncrementGap="100">
@@ -28,7 +42,7 @@
   <field name="describtion" type="text" multiValued="false" indexed="true" stored="true"/>
 
   <field name="date" type="pdate" multiValued="false" indexed="true" stored="true" docValues="true"/>
-  <field name="genre" type="pints" multiValued="true" indexed="true" stored="true" docValues="true"/>
+  <field name="genre" type="pint" multiValued="true" indexed="true" stored="true" docValues="true"/>
   <field name="price_class" type="pint" multiValued="false" indexed="true" stored="true" docValues="true"/>
 
   <copyField source="organizer" dest="search_text"/>
