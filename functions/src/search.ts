@@ -98,5 +98,5 @@ export const search = functions
       const text = await response.text();
       console.log(res.status, response.statusText, JSON.stringify(text));
 
-      res.json(text.response);
+      res.send(text.response);
     });
