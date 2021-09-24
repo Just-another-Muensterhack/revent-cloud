@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema name="revent" version="1.0">
+  <uniqueKey>id</uniqueKey>
+  <fieldType name="pdate" class="solr.DatePointField" docValues="true"/>
+  <fieldType name="pint" class="solr.IntPointField" docValues="true"/>
+  <fieldType name="pints" class="solr.IntPointField" docValues="true" multiValued="true"/>
+  <fieldType name="plong" class="solr.LongPointField" docValues="true"/>
+  <fieldType name="string" class="solr.StrField" sortMissingLast="true"/>
+  <fieldType name="text" class="solr.TextField" sortMissingLast="true"/>
+
+  <fieldType name="text_de" class="solr.TextField" positionIncrementGap="100">
+    <analyzer>
+      <tokenizer class="solr.StandardTokenizerFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
+      <filter class="solr.StopFilterFactory" format="snowball" words="lang/stopwords_de.txt" ignoreCase="true"/>
+      <filter class="solr.GermanNormalizationFilterFactory"/>
+      <filter class="solr.GermanLightStemFilterFactory"/>
+    </analyzer>
+  </fieldType>
+  
+  <field name="id" type="string" multiValued="false" indexed="true" required="true" stored="true"/>
+  <field name="_version_" type="plong" indexed="true" stored="true"/>
+  
+  <field name="search_text" type="text_de" multiValued="false" indexed="true" stored="false"/>
+
+  <field name="organizer" type="string" multiValued="false" indexed="true" stored="true"/>
+  <field name="title" type="string" multiValued="false" indexed="true" stored="true"/>
+  <field name="describtion" type="text" multiValued="false" indexed="true" stored="true"/>
+
+  <field name="date" type="pdate" multiValued="false" indexed="true" stored="true" docValues="true"/>
+  <field name="genre" type="pints" multiValued="true" indexed="true" stored="true" docValues="true"/>
+  <field name="price_class" type="pint" multiValued="false" indexed="true" stored="true" docValues="true"/>
+
+  <copyField source="organizer" dest="search_text"/>
+  <copyField source="title" dest="search_text"/>
+  <copyField source="describtion" dest="search_text"/>
+</schema>
