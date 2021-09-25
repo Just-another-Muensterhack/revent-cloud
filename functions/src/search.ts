@@ -52,7 +52,6 @@ export const index = functions
         },
         body: JSON.stringify(body),
       });
-      res.set('Access-Control-Allow-Origin', '*');
 
       const text = await res.text();
       console.log(res.status, res.statusText, JSON.stringify(text));
@@ -95,7 +94,19 @@ export const search = functions
         },
         body: JSON.stringify(body),
       });
+      
       res.set('Access-Control-Allow-Origin', '*');
+
+      if (req.method === 'OPTIONS') {
+        // Send response to OPTIONS requests
+        res.set('Access-Control-Allow-Methods', 'GET');
+        res.set('Access-Control-Allow-Headers', 'Content-Type');
+        res.set('Access-Control-Max-Age', '3600');
+        res.status(204).send('');
+      } else {
+        res.send('Hello World!');
+      }
+
 
       const text = await response.text();
       console.log(res.status, response.statusText, JSON.stringify(text));
