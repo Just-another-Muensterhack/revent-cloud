@@ -52,6 +52,7 @@ export const index = functions
         },
         body: JSON.stringify(body),
       });
+      res.set('Access-Control-Allow-Origin', '*');
 
       const text = await res.text();
       console.log(res.status, res.statusText, JSON.stringify(text));
@@ -94,6 +95,7 @@ export const search = functions
         },
         body: JSON.stringify(body),
       });
+      res.set('Access-Control-Allow-Origin', '*');
 
       const text = await response.text();
       console.log(res.status, response.statusText, JSON.stringify(text));
