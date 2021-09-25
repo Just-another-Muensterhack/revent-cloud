@@ -21,8 +21,8 @@
   <fieldType name="string" class="solr.StrField" sortMissingLast="true"/>
   <fieldType name="strings" class="solr.StrField" sortMissingLast="true" multiValued="true"/>
   <fieldType name="text" class="solr.TextField" sortMissingLast="true"/>
-  <fieldType name="text_de" class="solr.TextField" positionIncrementGap="100">
 
+  <fieldType name="text_de" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <tokenizer class="solr.StandardTokenizerFactory"/>
       <filter class="solr.LowerCaseFilterFactory"/>
@@ -46,6 +46,7 @@
   <field name="search_text" type="text_de" multiValued="true" indexed="true" stored="false"/>
   <field name="title" type="string" multiValued="false" indexed="true" stored="true"/>
   <field name="website_url" type="strings"/>
+
   <copyField source="description" dest="search_text"/>
   <copyField source="organizer" dest="search_text"/>
   <copyField source="title" dest="search_text"/>
